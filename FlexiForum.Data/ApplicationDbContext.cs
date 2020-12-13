@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using FlexiForum.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,13 @@ namespace FlexiForum.Data
             : base(options)
         {
         }
+
+        public DbSet<Forum> Forums { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<PostReply> PostReplies { get; set; }
     }
 }
