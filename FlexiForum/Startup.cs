@@ -1,4 +1,6 @@
 using FlexiForum.Data;
+using FlexiForum.Data.Interfaces;
+using FlexiForum.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,8 @@ namespace FlexiForum
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IForum, ForumService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlexiForum.Data\FlexiForum.Data.csproj" />
+    <ProjectReference Include="..\FlexiForum.Services\FlexiForum.Services.csproj" />
   </ItemGroup>
 
 </Project>

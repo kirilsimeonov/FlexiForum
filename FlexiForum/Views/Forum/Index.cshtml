@@ -1,0 +1,29 @@
+﻿@model FlexiForum.Models.ForumViewModels.IndexForumModel
+
+<h1>FORUMS</h1>
+
+
+<table class="table-hover table" id="indexForumTable">
+    <tbody>
+        @foreach (var forum in Model.ForumsList)
+        {
+        <tr>
+
+            <td>
+                @forum.Title
+            </td>
+            <td>
+                @forum.Info
+            </td>
+            
+
+        </tr>
+        }
+
+
+    </tbody>
+    
+    
+    
+    
+</table>
