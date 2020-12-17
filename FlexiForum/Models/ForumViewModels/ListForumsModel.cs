@@ -12,6 +12,8 @@ namespace FlexiForum.Models.ForumViewModels
 
         public string Info { get; set;}
 
+        public string Picture { get; set;}
+
         public string Title { get; set;}
 
 

@@ -1,0 +1,43 @@
+﻿@model FlexiForum.Models.ForumViewModels.ForumThemeModel
+
+<h1>Discuss @Model.Forum.Title here!</h1>
+
+@if (Model.Posts.Any())
+{
+    <table class="table-hovered table table-bordered">
+        <tbody>
+            @foreach (var post in Model.Posts)
+            {
+            <tr>
+                <td>
+                    <a asp-controller="Post" asp-action="Ïndex" asp-route-id="@post.Id"> @post.Title</a>
+                   
+                </td>
+                <td>
+                    @post.Author
+                </td>
+                <td>
+                    @post.PostedOn
+                </td>
+                <td>
+                    @post.RepliesNumber
+                </td>
+            </tr>
+
+            }
+        </tbody>
+
+    </table>
+}
+else
+	{
+	   <div class="zeroposts">
+
+           <h2>
+               Still no @Model.Forum.Title posts! 
+               Be the first to 
+               <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">post</a>
+               
+           </h2>
+       </div>
+	}
