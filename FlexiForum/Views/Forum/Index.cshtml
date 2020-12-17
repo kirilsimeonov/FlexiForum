@@ -10,7 +10,12 @@
         <tr>
 
             <td>
-                @forum.Title
+                <a asp-controller="Forum" asp-action="Theme" asp-route-id="@forum.Id">
+
+                    @forum.Title
+
+                </a>
+                
             </td>
             <td>
                 @forum.Info

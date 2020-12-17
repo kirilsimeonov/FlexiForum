@@ -12,6 +12,7 @@ namespace FlexiForum.Controllers
     public class ForumController : Controller
     {
 
+        private readonly IPost _postService;
 
         private readonly IForum _forumService;
 
@@ -21,6 +22,16 @@ namespace FlexiForum.Controllers
 
             _forumService = forumService;
         }
+
+        public IActionResult Theme(int id)
+        {
+            var forum = _forumService.TakeById(id);
+
+            var posts = _postService.TakeSpecificPosts(id);
+            var listPosts = 
+
+        }
+
 
         public IActionResult Index()
         {

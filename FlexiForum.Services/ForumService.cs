@@ -4,6 +4,7 @@ using FlexiForum.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FlexiForum.Services
@@ -31,7 +32,14 @@ namespace FlexiForum.Services
 
         public Forum TakeById(int id)
         {
-            throw new NotImplementedException();
+
+            var forum = _context.Forums.Where(x => x.Id == id)
+                .Include(x => x.Posts).ThenInclude(y => y.User)
+                .Include(x => x.Posts).ThenInclude(y => y.PostReplies).ThenInclude(z => z.User)
+                .FirstOrDefault();
+
+            return forum;
+
         }
 
         public Task UdpateForumInfo(int forumId, string newInfo)
