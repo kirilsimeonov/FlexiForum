@@ -1,0 +1,39 @@
+﻿@model FlexiForum.Models.PostViewModels.IndexPostModel
+
+<h1>@Model.Title</h1>
+
+
+<div>
+
+    AUTHOR: @Model.AuthorName
+    CREATED ON: @Model.CreatedOn
+    AUTHOR RATING: @Model.AuthorRating
+
+</div>
+
+<div>
+    Post:
+    @Model.Content
+</div>
+
+@if (Model.Replies.Any())
+{
+    foreach (var reply in Model.Replies)
+    {
+<div>
+    <div>
+
+        REPLY AUTHOR: @reply.AuthorName
+        REPLY CREATED ON: @reply.CreatedOn
+        AUTHOR RATING: @Model.AuthorRating
+
+    </div>
+
+    <div>
+        REPLY:
+        @reply.Content
+    </div>
+
+</div>
+    }
+}

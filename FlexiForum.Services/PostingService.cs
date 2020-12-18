@@ -1,6 +1,7 @@
 ﻿using FlexiForum.Data;
 using FlexiForum.Data.Interfaces;
 using FlexiForum.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,11 @@ namespace FlexiForum.Services
 
         public Post TakeById(int id)
         {
-            throw new NotImplementedException();
+            var post = _context.Posts.Where(x => x.Id == id).Include(x => x.User)
+                .Include(x => x.Forum)
+                .Include(x => x.PostReplies).ThenInclude(r=>r.User).FirstOrDefault(); //ползвам include понеже user e virtual и е lazyloaded
+
+            return post; //взимам single post
         }
 
         public IEnumerable<Post> TakeForumPosts(int id)
