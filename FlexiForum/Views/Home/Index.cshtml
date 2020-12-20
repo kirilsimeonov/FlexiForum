@@ -1,8 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model FlexiForum.Models.HomeViewModels.IndexHomeModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container body-content">
+
+    <div class="row frontPageSplash">
+        <div class="col-md-6 frontPageLearn">
+            <div class="frontPageTitle">Discuss anything you like with other people.</div>
+
+            <p class="frontPageUnderTitle">FlexiForum is here for you to share ideas</p>
+            <div>
+                <form asp-controller="Search" asp-action="Search" method="post">
+                    <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search" />
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="row frontPageContent">
+        <h3 id="lastPosts">Last Postings</h3>
+        <table class="table-hover table" id="lastPostsTable">
+            <tbody>
+
+                @foreach (var post in Model.LastPosts)
+                {
+                    <tr>
+                        <td>
+                            <div class="forumPic" style="background-image: url(@post.Forum.Picture); background-size:100%"></div>
+
+                            <div class="postTitle">
+                                <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                    @post.Title
+                                </a>
+                            </div>
+                            <div class="postUnderTitle">
+                                @if (post.RepliesNumber == 1)
+                                {
+                                    <span>@post.RepliesNumber Reply</span>
+                                }
+                                @if (post.RepliesNumber > 1)
+                                {
+                                    <span>@post.RepliesNumber Replies</span>
+                                }
+                                @if (post.RepliesNumber == 0)
+                                {
+                                    <span>No Replies!</span>
+                                }
+                                <span class="postUser">
+                                    <a asp-controller="Profile" asp-action="Info" as-route-id="@post.AuthorId">@post.Author</a>
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+
+
+        </table>
+
+    </div>
+
 </div>

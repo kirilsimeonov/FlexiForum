@@ -37,7 +37,11 @@ namespace FlexiForum.Services
 
         public IEnumerable<Post> TakeAll()
         {
-            throw new NotImplementedException();
+            var posts = _context.Posts.Include(x => x.User)
+
+                .Include(x => x.PostReplies).ThenInclude(r => r.User).Include(x => x.Forum);
+
+            return posts;
         }
 
         public Post TakeById(int id)
@@ -54,6 +58,14 @@ namespace FlexiForum.Services
             var posts = _context.Forums.Where(x => x.Id == id).First().Posts;
 
             return posts;
+        }
+
+        public IEnumerable<Post> TakeLastPosts(int v)
+        {
+            var lastPosts = TakeAll().OrderByDescending(post => post.CreatedOn)
+                .Take(v);
+
+            return lastPosts;
         }
 
         public IEnumerable<Post> TakeSpecificPosts(string searchParameter)

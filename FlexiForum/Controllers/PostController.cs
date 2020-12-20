@@ -75,7 +75,7 @@ namespace FlexiForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(CreatePostModel model) //Add post , submit post
+        public async Task<IActionResult> CreatePost(CreatePostModel model) //Add post , submit post //ПРОВЕРИ ТУК
         {
             var userId = _userManager.GetUserId(User);  //build in userManager service
 

@@ -24,6 +24,7 @@ namespace FlexiForum.Data.Interfaces
         //Task CreateReply(PostReply postReply);
 
         Task EditContent(int id, string newContent);
+        IEnumerable<Post> TakeLastPosts(int v);
     }
 }
  
