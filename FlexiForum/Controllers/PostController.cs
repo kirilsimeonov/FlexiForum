@@ -75,17 +75,17 @@ namespace FlexiForum.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(CreatePostModel model)
+        public async Task<IActionResult> CreatePost(CreatePostModel model) //Add post , submit post
         {
             var userId = _userManager.GetUserId(User);  //build in userManager service
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user =  _userManager.FindByIdAsync(userId).Result;
 
             var newPost = GeneratePost(model, user);
 
-            await _postService.Create(newPost);
+            _postService.Create(newPost).Wait(); //с Асинк не работи, за това добавих Wait,блок the thread until the task is complete
 
-            return RedirectToAction("Index", "Post", newPost.Id);
+            return RedirectToAction("Index", "Post", new { id = newPost.Id });
 
             //TODO: Rating
         }

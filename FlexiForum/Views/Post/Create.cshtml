@@ -1,0 +1,25 @@
+﻿@model FlexiForum.Models.PostViewModels.CreatePostModel
+
+<h1> New Post -> @Model.ForumName</h1>
+
+<form asp-action="CreatePost" method="post"ïd="createPostForm">
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" /> 
+    </div>
+
+
+
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" classs="form-control"></textarea>
+
+    </div>
+
+    <button type="submit" id="submitPostBtn" class="btn btn-submitPost">Create Post!</button>
+    <input asp-for="ForumId" type="hidden" /> 
+
+
+
+</form>
