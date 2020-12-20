@@ -35,7 +35,7 @@ namespace FlexiForum.Services
 
             var forum = _context.Forums.Where(x => x.Id == id)
                 .Include(x => x.Posts).ThenInclude(y => y.User)
-                .Include(x => x.Posts).ThenInclude(y => y.PostReplies).ThenInclude(z => z.User)
+                .Include(x => x.Posts).ThenInclude(y=>y.PostReplies).ThenInclude(r=>r.User)
                 .FirstOrDefault();
 
             return forum;

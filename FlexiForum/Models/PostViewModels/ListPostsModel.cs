@@ -24,11 +24,11 @@ namespace FlexiForum.Models.PostViewModels
 
         public int RepliesNumber { get; set;}
 
-        public string ForumTitle { get; set;}
+       // public string ForumTitle { get; set;}
 
-        public int ForumId { get; set;}
+        //public int ForumId { get; set;}
 
-        public string ForumImage { get; set; }
+       // public string ForumImage { get; set; }
 
 
 

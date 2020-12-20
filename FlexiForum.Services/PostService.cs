@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace FlexiForum.Services
 {
-    public class PostingService : IPost
+    public class PostService : IPost
     {
         private readonly ApplicationDbContext _context;
 
-        public PostingService(ApplicationDbContext context)
+        public PostService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -42,15 +42,15 @@ namespace FlexiForum.Services
         public Post TakeById(int id)
         {
             var post = _context.Posts.Where(x => x.Id == id).Include(x => x.User)
-                .Include(x => x.Forum)
-                .Include(x => x.PostReplies).ThenInclude(r=>r.User).FirstOrDefault(); //ползвам include понеже user e virtual и е lazyloaded
+                
+                .Include(x => x.PostReplies).ThenInclude(r=>r.User).Include(x => x.Forum).First(); //ползвам include понеже user e virtual и е lazyloaded
 
             return post; //взимам single post
         }
 
         public IEnumerable<Post> TakeForumPosts(int id)
         {
-            var posts = _context.Forums.Where(x => x.Id == id).FirstOrDefault().Posts;
+            var posts = _context.Forums.Where(x => x.Id == id).First().Posts;
 
             return posts;
         }

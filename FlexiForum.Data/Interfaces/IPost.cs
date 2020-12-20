@@ -10,11 +10,11 @@ namespace FlexiForum.Data.Interfaces
     {
         Post TakeById(int id);
 
-        IEnumerable<Post> TakeSpecificPosts(string searchParameter); //search query
+        IEnumerable<Post> TakeSpecificPosts(string searchParameter); //search query get filtered posts
 
         IEnumerable<Post> TakeAll();
 
-        IEnumerable<Post> TakeForumPosts(int id);
+        IEnumerable<Post> TakeForumPosts(int id); //get posts by forum
 
 
         Task Create(Post post);

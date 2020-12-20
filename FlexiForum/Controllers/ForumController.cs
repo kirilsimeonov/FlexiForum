@@ -37,16 +37,17 @@ namespace FlexiForum.Controllers
             {
                 Id=x.Id,
                 Title = x.Title,
-                PostedOn=x.CreatedOn.ToString(),
-
-                Forum = CreateForumList(x),
-
-                RepliesNumber=x.PostReplies.Count(),
+                AuthorId = x.User.Id,
+                RepliesNumber = x.PostReplies.Count(),
                 AuthorRating = x.User.Rating,
-                AuthorId=x.User.Id,
+                Author = x.User.UserName,
+                
+                PostedOn=x.CreatedOn.ToString(),
+                
+                
+                
 
-
-
+                Forum = CreateForumList(x)
             });
 
             var model = new ForumThemeModel
@@ -62,7 +63,10 @@ namespace FlexiForum.Controllers
         {
             var forum = post.Forum;
 
-            var result = new ListForumsModel
+            return CreateForumList(forum);
+
+
+          /*  return new ListForumsModel
             {
                 Id = forum.Id,
                 Title = forum.Title,
@@ -70,14 +74,14 @@ namespace FlexiForum.Controllers
                 Picture = forum.Image
 
             };
-            return result;
+            */
         }
 
         private ListForumsModel CreateForumList(Forum forum)
         {
           
 
-            var result = new ListForumsModel
+            return new ListForumsModel
             {
                 Id = forum.Id,
                 Title = forum.Title,
@@ -85,7 +89,7 @@ namespace FlexiForum.Controllers
                 Picture = forum.Image
 
             };
-            return result;
+            
         }
 
         public IActionResult Index()
