@@ -2,22 +2,35 @@
 
 <div class="container body-content">
 
-    <div class="row frontPageSplash">
-        <div class="col-md-6 frontPageLearn">
-            <div class="frontPageTitle">Discuss anything you like with other people.</div>
 
-            <p class="frontPageUnderTitle">FlexiForum is here for you to share ideas</p>
+    <div class="row homePageBigPic">
+
+
+        <div class="col-md-7 homePageWelcome">
+            
+            <div class="homePageHeader">SHARE EVERYTHING</div>
+
+
+
+            <!--<p class="homePageSubHeader">Flexi Forum is here for you.</p>--->
             <div>
                 <form asp-controller="Search" asp-action="Search" method="post">
-                    <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search" />
+
+
+                    <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search." />
                 </form>
+
+
             </div>
         </div>
         <div class="col-md-6">
         </div>
     </div>
 
-    <div class="row frontPageContent">
+
+    <div class="row homePageContent">
+
+
         <h3 id="lastPosts">Last Postings</h3>
         <table class="table-hover table" id="lastPostsTable">
             <tbody>
@@ -27,6 +40,7 @@
                     <tr>
                         <td>
                             <div class="forumPic" style="background-image: url(@post.Forum.Picture); background-size:100%"></div>
+
 
                             <div class="postTitle">
                                 <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
@@ -46,7 +60,10 @@
                                 {
                                     <span>No Replies!</span>
                                 }
-                                <span class="postUser">
+
+
+
+                                <span class="postbyUser">
                                     <a asp-controller="Profile" asp-action="Info" as-route-id="@post.AuthorId">@post.Author</a>
                                 </span>
                             </div>

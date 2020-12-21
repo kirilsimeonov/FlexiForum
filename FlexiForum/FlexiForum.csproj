@@ -20,4 +20,9 @@
     <ProjectReference Include="..\FlexiForum.Services\FlexiForum.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\forum\" />
+    <Folder Include="wwwroot\images\user\" />
+  </ItemGroup>
+
 </Project>

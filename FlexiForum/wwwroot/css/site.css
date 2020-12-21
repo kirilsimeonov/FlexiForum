@@ -1,11 +1,145 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #808080;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-image: url("/images/background/background1.jpg");
+}
+
+.homePageContent {
+    background-color: rgba(255,255,255,0.78);
+    padding: 15px;
+}
+
+.navbar {
+    box-shadow: 0 5px 5px -5px #1b6ec2;
+}
+
+
+.sectionHeading {
+    color:white;
+    font-family: 'Exo';
+    font-size: 1.25em;
+    margin-bottom: 13px;
+    border-bottom: 1px solid #1861ac
+
+}
+
+.postHeading
+{
+color:white;
+font-size: 1.2em;
+font-family: 'Exo';
+}
+
+.logo {
+    background-image: url("/images/Logo/Flexy1No.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width:160px;
+}
+
+
+
+.sectionHeader {
+    background-color: rebeccapurple;
+    opacity: 0.9;
+}
+
+.sectionInfo {
+    height:350px;
+    background-color:gray;
+}
+
+.homePageBigPic
+{
+    background-image:url("/images/background/pexels2.jpg");
+    background-position: right;
+    background-repeat:no-repeat;
+}
+
+.homePageWelcome
+{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 300px;
+    padding: 15px 0 0 40px;
+}
+
+.navbar li {
+    font-weight: bold;
+}
+
+.boxDescription{
+    color:burlywood;
+}
+
+.homePageFrontContainer
+{
+    border: 2px solid #0ff;
+    padding: 37px 90px 40px 37px;
+    background-color: #808080;
+    font-family: 'Exo';
+}
+
+#lastPosts
+{
+    color: white;
+    
+    font-weight: bold;
+    font-size: 1.3em;
+    margin: 5px 0 18px 0;
+}
+
+
+
+
+.homePageHeader{
+    color: white;
+    font-size:3.4em;
+    margin: 15px 0;
+}
+
+.homePageSubHeader {
+    color: white;
+    font-size: 1.8em;
+    margin: 15px 0;
+}
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    box-shadow: 0 5x 5px -5px #808080;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
+
+.homeSearch {
+    margin-top: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 2.1em;
+    font-family: 'Exo';
+    font-weight: bold;
+    border: 0px;
+    height: 2.3em;
+    width: 100%;
+    width: 600px;
+    padding: 9px;
+    transition: ease-in 0.2s;
+}
+
+    .homeSearch:focus {
+        border: none !important;
+        background-color: rgba(0, 0, 0, 0.9);
+        transition: ease-in 0.2s;
+        outline: none !important;
+        color: white;
+        box-shadow: 0 5px 5px -5px #000;
+    }
 
 /* Provide sufficient contrast against white background */
 a {
@@ -58,10 +192,9 @@ html {
   min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
+
+
+
 .footer {
   position: absolute;
   bottom: 0;

@@ -1,49 +1,114 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<FlexiForum.Data.Models.ApplicationUser> UserManager
+@inject SignInManager<FlexiForum.Data.Models.ApplicationUser> SignInManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FlexiForum</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <environment include="Development, Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo" rel="stylesheet">
+
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-fixed-top navbar-inverse ">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FlexiForum</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="navbar-header">
+                    <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index"></a>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+                <div class="navbar-collapse collapse">
+                    <!----  <partial name="_LoginPartial" /> -->
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Forum" asp-action="Index">Forums</a></li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="dropdown">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - FlexiForum - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">Settings<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li role="separator" class="divider"></li>
+                                        <li class="dropdown-header">Profile</li>
+                                        <li><a asp-controller="Profile" asp-action="Info"> My Profile</a> </li>
+
+
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <li role="separator" class="divider"></li>
+                                            <li class="dropdown-header">Admin</li>
+                                            <li><a asp-controller="Forum" asp-action="Create">Create Forum</a></li>
+                                            <li><a asp-controller="Profile" asp-action="Index">See all users</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                            <ul class="nav navbar-nav navbar-right ">
+                                <li class="active"><a asp-controller="Account" asp-action="Register">Register</a></li>
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            </ul>
+                        }
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="navbar-right" id="logoutForm">
+                                <ul class="nav navbar-nav nabar-right">
+                                    <li>Greetings, @UserManager.GetUserName(User)</li>
+                                    <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+
+                                </ul>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container body-content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>
