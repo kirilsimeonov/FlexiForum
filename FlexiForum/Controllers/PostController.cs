@@ -40,10 +40,13 @@ namespace FlexiForum.Controllers
             {
                 Id = post.Id,
                 Title = post.Title,
+                ForumId=post.Forum.Id,
+                ForumTitle=post.Forum.Title,
                 CreatedOn = post.CreatedOn,
                 AuthorName = post.User.UserName,
                 AuthorId = post.User.Id,
                 Content = post.Content,
+                IsAdministrator= IsAdministrator(post.User),
                 AuthorRating = post.User.Rating,
                 AuthorPicture = post.User.ProfilePic,
                 Replies=postReplies
@@ -53,6 +56,17 @@ namespace FlexiForum.Controllers
 
 
             return View(viewModel);
+        }
+
+        private  bool IsAdministrator(ApplicationUser user)
+        {
+            // var roles = await _userManager.GetRolesAsync(user.Id);
+            //  var isAdmin = roles.Contains("Admin");
+            //  return isAdmin;
+            //return  _userManager.GetRolesAsync(user).Result.Contains("Admin"); //result blocks
+
+           
+            return User.IsInRole("Admin");
         }
 
         public IActionResult Create(int id) //forumId
@@ -117,6 +131,7 @@ namespace FlexiForum.Controllers
                 CreatedOn = x.CreatedOn,
                 Content=x.Content,
                 AuthorName =x.User.UserName,
+                IsAdministrator=IsAdministrator(x.User),
                 AuthorId=x.User.Id,
                 AuthorRating = x.User.Rating,
                 AuthorPicture = x.User.ProfilePic,

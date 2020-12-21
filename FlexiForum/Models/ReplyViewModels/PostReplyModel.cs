@@ -16,6 +16,8 @@ namespace FlexiForum.Models.ReplyViewModels
 
         public string AuthorName { get; set; }
 
+        public bool IsAdministrator { get; set; }
+
         public string AuthorId { get; set; }
        
         public int AuthorRating { get; set; }

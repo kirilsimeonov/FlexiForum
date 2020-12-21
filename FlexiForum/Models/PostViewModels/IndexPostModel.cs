@@ -12,7 +12,15 @@ namespace FlexiForum.Models.PostViewModels
 
         public string Title { get; set; }
 
+
+
+        public int ForumId { get; set;}
+
+        public string ForumTitle { get; set;}
+
         public string AuthorId { get; set; }
+
+        public bool IsAdministrator { get; set; }
 
         public string AuthorName { get; set; }
 

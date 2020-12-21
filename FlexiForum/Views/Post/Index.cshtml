@@ -1,39 +1,94 @@
 ﻿@model FlexiForum.Models.PostViewModels.IndexPostModel
 
-<h1>@Model.Title</h1>
+
+<div class="container body-structure">
+
+    <div class="row postHead">
+        <div class="postHeading">
+            <span>
+                @Model.Title
+
+            </span>
+            
+
+            <span>
+                <a class="btn btn-danger" asp-controller="Forum" asp-action="Theme" asp-route-id="@Model.ForumId">Go Back to @Model.ForumTitle</a>
+            </span>
+
+        </div>
 
 
-<div>
-
-    AUTHOR: @Model.AuthorName
-    CREATED ON: @Model.CreatedOn
-    AUTHOR RATING: @Model.AuthorRating
+    </div>
 
 </div>
 
-<div>
-    Post:
-    @Model.Content
-</div>
 
+<div class="row">
+    <div class="col-md-4">
+        <div class="authorPicture" style="background-image: url(@Model.AuthorPicture);">
+            <a asp-controller="Profile" asp-action="Info" asp-route-id="@Model.AuthorId">
+
+                @Model.AuthorName
+
+            </a>
+
+            <span>Created On: @Model.CreatedOn</span>
+            <div class="col-md-8">
+                @Model.Content
+
+            </div>
+
+           @if (Model.IsAdministrator)    
+            {
+            <span>Admin</span>
+            }
+
+        </div>
+        
+        
+
+    </div>
+
+
+</div>
+<div class="container">
+    @if (User.Identity.IsAuthenticated)
+    {
+    <div class="row">
+
+        <span>
+
+            <a class="btn-danger" asp-controller="Reply" asp-action="Add" asp-route-id="@Model.Id">Add Reply</a>
+
+        </span>
+
+    </div>
+    }
+</div>
 @if (Model.Replies.Any())
 {
-    foreach (var reply in Model.Replies)
+    foreach (var r in @Model.Replies)
     {
-<div>
-    <div>
+        <div class="col-md-4">
+            <div class="authorPicture" style="background-image: url(@r.AuthorPicture)">
+                <a asp-controller="Profile" asp-action="Info" asp-route-id="@r.AuthorId">
+                    @r.AuthorName
 
-        REPLY AUTHOR: @reply.AuthorName
-        REPLY CREATED ON: @reply.CreatedOn
-        AUTHOR RATING: @Model.AuthorRating
-
-    </div>
-
-    <div>
-        REPLY:
-        @reply.Content
-    </div>
-
-</div>
+                </a>
+                @if (r.IsAdministrator)
+                {
+                    <div>
+                        Admin
+                    </div>
+                }
+                <span>Replied on: @r.CreatedOn</span>
+            </div>
+            <div class="col-md-8">@r.Content</div>
+        </div>
     }
 }
+else
+{
+    <h4>No Replies</h4>
+}
+
