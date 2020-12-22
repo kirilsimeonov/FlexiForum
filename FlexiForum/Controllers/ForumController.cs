@@ -18,19 +18,28 @@ namespace FlexiForum.Controllers
         private readonly IForum _forumService;
 
 
-        public ForumController(IForum forumService)
+        public ForumController(IForum forumService, IPost postService)
         {
-
+            _postService = postService;
             _forumService = forumService;
+
+        }
+        [HttpPost]
+        public IActionResult Search(int id,string searchText)
+        {
+            return RedirectToAction("Theme", new { id, searchText });
         }
 
-        public IActionResult Theme(int id)
+        public IActionResult Theme(int id, string searchText)
         {
-            //var posts = _postService.TakeForumPosts(id);
+            var posts = new List<Post>();
             
             var forum = _forumService.TakeById(id);
 
-            var posts = forum.Posts;
+          
+                posts = _postService.TakeSpecificPosts(forum, searchText).ToList();
+            
+            
 
 
             var listedPosts = posts.Select(x => new ListPostsModel 

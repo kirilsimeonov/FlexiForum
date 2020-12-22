@@ -68,9 +68,22 @@ namespace FlexiForum.Services
             return lastPosts;
         }
 
-        public IEnumerable<Post> TakeSpecificPosts(string searchParameter)
+        public IEnumerable<Post> TakeSpecificPosts(Forum forum, string searchText)
         {
-            throw new NotImplementedException();
+            
+
+           
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                return forum.Posts;
+            }
+            else
+            {
+                return forum.Posts.Where(x => x.Content.Contains(searchText) || x.Title.Contains(searchText));
+            }
+
+            
         }
     }
 }
