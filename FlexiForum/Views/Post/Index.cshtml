@@ -5,11 +5,11 @@
 
     <div class="row postHead">
         <div class="postHeading">
-            <span>
+            <span class="postTitle">
                 @Model.Title
 
             </span>
-            
+
 
             <span>
                 <a class="btn btn-danger" asp-controller="Forum" asp-action="Theme" asp-route-id="@Model.ForumId">Go Back to @Model.ForumTitle</a>
@@ -20,75 +20,78 @@
 
     </div>
 
-</div>
 
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="authorPicture" style="background-image: url(@Model.AuthorPicture);">
+
+    <div class="row" id="postIndex">
+        <div class="col-md-4 postCreatorBox">
+            <div class="postCreatorPicture" style="background-image: url(@Model.AuthorPicture); background-size:100%;"></div>
             <a asp-controller="Profile" asp-action="Info" asp-route-id="@Model.AuthorId">
 
                 @Model.AuthorName
 
             </a>
 
-            <span>Created On: @Model.CreatedOn</span>
-            <div class="col-md-8">
-                @Model.Content
+            <span class="postInfo">Created On: @Model.CreatedOn</span>
 
-            </div>
 
-           @if (Model.IsAdministrator)    
+            @if (Model.IsAdministrator)
             {
-            <span>Admin</span>
+                <span>Admin</span>
             }
 
         </div>
-        
-        
+        <div class="col-md-8 postContentBox">
+            @Model.Content
 
-    </div>
-
-
-</div>
-<div class="container">
-    @if (User.Identity.IsAuthenticated)
-    {
-    <div class="row">
-
-        <span>
-
-            <a class="btn-danger" asp-controller="Reply" asp-action="Add" asp-route-id="@Model.Id">Add Reply</a>
-
-        </span>
-
-    </div>
-    }
-</div>
-@if (Model.Replies.Any())
-{
-    foreach (var r in @Model.Replies)
-    {
-        <div class="col-md-4">
-            <div class="authorPicture" style="background-image: url(@r.AuthorPicture)">
-                <a asp-controller="Profile" asp-action="Info" asp-route-id="@r.AuthorId">
-                    @r.AuthorName
-
-                </a>
-                @if (r.IsAdministrator)
-                {
-                    <div>
-                        Admin
-                    </div>
-                }
-                <span>Replied on: @r.CreatedOn</span>
-            </div>
-            <div class="col-md-8">@r.Content</div>
         </div>
-    }
-}
-else
-{
-    <h4>No Replies</h4>
-}
 
+
+    </div>
+
+
+
+    <div class="row" id="divider">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row">
+
+                <span>
+
+                    <a class="btn-danger" asp-controller="Reply" asp-action="Add" asp-route-id="@Model.Id">Add Reply</a>
+
+                </span>
+
+            </div>
+        }
+    </div>
+    @if (Model.Replies.Any())
+    {
+        foreach (var r in @Model.Replies)
+        {
+            <div class="row" id="postIndex">
+                <div class="col-md-3 postCreatorBox">
+                    <div class="postCreatorPicture" style="background-image: url(@r.AuthorPicture)">
+                        <a asp-controller="Profile" asp-action="Info" asp-route-id="@r.AuthorId">
+                            @r.AuthorName
+
+                        </a>
+                        @if (r.IsAdministrator)
+                        {
+                            <div>
+                                Admin
+                            </div>
+                        }
+                        <span>Replied on: @r.CreatedOn</span>
+                    </div>
+                    <div class="col-md-8 postContentBox">@r.Content</div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h4>No Replies</h4>
+    }
+
+</div>

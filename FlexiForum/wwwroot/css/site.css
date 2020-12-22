@@ -16,10 +16,56 @@ body {
     padding: 15px;
 }
 
+#postContentBox
+{
+    border-left: 2px solid rgba(255,255,255,0.78);
+    color: white;
+    padding:24px;
+    font-family:'Exo';
+    
+
+}
+
+.postTitle{
+    
+   font-size: 1.5em;
+
+}
+.postCreatorRating
+{
+    color: red;
+    font=family: 'Exo';
+    font-size: 0.8m;
+    
+
+}
+
 .navbar {
     box-shadow: 0 5px 5px -5px #1b6ec2;
 }
+.postInfo
+{
+ 
+ color: black;
+ font-family: 'Exo';
+ font-size: 0.7em;
+}
 
+.postCreatorBox
+{
+    width:200px;
+    padding: 13px;
+    font-family: 'Exo';
+    color: maroon;
+}
+
+.postCreatorPicture
+{
+    background-size: 100%;
+    height: 90px;
+    width: 90px;
+
+}
 
 .sectionHeading {
     color:white;
@@ -31,15 +77,18 @@ body {
 }
 
 .postHead {
-    padding: 10px 0 22px 22px;
+    padding: 6px 0 24px 24px;
     background-color: #0094ff;
 }
 
 .postHeading
 {
 color:white;
+padding: 17px 0 17px 0;
 font-size: 1.3em;
+border-bottom: 2px solid #000;
 font-family: 'Exo';
+
 }
 
 .logo {
@@ -117,7 +166,11 @@ font-family: 'Exo';
 }
 
 
-
+#postIndex {
+    padding-left:16px;
+    padding-right:16px;
+    background-color: rgba(255,255,255,0.78);
+}
 
 .homePageHeader{
     color: white;
