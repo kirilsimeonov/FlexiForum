@@ -8,6 +8,8 @@ namespace FlexiForum.Models.ForumViewModels
 {
     public class ForumThemeModel
     {
+        public string SearchText { get; set; }
+
         public IEnumerable<ListPostsModel> Posts { get; set;}
 
         public ListForumsModel Forum { get; set;}

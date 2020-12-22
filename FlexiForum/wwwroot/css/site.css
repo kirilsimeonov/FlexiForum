@@ -11,6 +11,19 @@ body {
     background-image: url("/images/background/background1.jpg");
 }
 
+#simpleTable td {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.forumLogo {
+    background-color: black;
+    
+    float: left;
+    margin-right: 25px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #555;
+}
 .homePageContent {
     background-color: rgba(255,255,255,0.78);
     padding: 15px;
@@ -74,6 +87,11 @@ body {
     margin-bottom: 13px;
     border-bottom: 1px solid #1861ac
 
+}
+
+#goButton
+{
+    margin-left: 50px;
 }
 
 .postHead {

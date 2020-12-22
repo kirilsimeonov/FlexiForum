@@ -1,48 +1,97 @@
 ﻿@model FlexiForum.Models.ForumViewModels.ForumThemeModel
 
-<h1>Discuss @Model.Forum.Title here!</h1>
 
-<span id="headingBtn">
-    
-    <a asp-controller="Post" asp-action="Create" asp-route-id=@Model.Forum.Id class="btn btn-newPost ">Create Post!</a>
-    </span>
+<div class="container body-structure">
 
-@if (Model.Posts.Any())
-{
-    <table class="table-hovered table table-bordered">
-        <tbody>
-            @foreach (var post in Model.Posts)
+    <div class="row postHead">
+        <div class="postHeading">
+            <span>Discuss @Model.Forum.Title here! </span>
+
+            @if (Context.User.Identity.IsAuthenticated)
             {
-            <tr>
-                <td>
-                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id"> @post.Title</a>
-                   
-                </td>
-                <td>
-                    @post.Author
-                </td>
-                <td>
-                    @post.PostedOn
-                </td>
-                <td>
-                    @post.RepliesNumber
-                </td>
-            </tr>
+                <span id="goButton">
 
+                    <a asp-controller="Post" asp-action="Create" asp-route-id=@Model.Forum.Id class=" btn btn-danger ">Create Post!</a>
+
+                </span>
             }
-        </tbody>
 
-    </table>
-}
-else
-	{
-	   <div class="zeroposts">
+            <form asp-controller="Forum" asp-action="Search" method="post">
 
-           <h2>
-               Still no @Model.Forum.Title posts! 
-               Be the first to 
-               <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">post</a>
+                <div class="searchField">
+
+                    <input asp-for="SearchText" type="text" class="searchInput" placeholder="Search Forum">
+
+                    <button type="submit" class="btn btn-danger">Search</button>
+
+                </div>
+                
+                <input asp-for="Forum.Id" name="id" type="hidden" />
+
+            </form>
+        </div>
+        <div class="sectionDescription">
+            <div class="forumPic" style="background-image: url(@Model.Forum.Picture); background-size:100%"></div>
+            
+
+            <p>
                
-           </h2>
-       </div>
-	}
+                @if (!Context.User.Identity.IsAuthenticated)
+                {
+                    <span><strong>PLEASE <a asp-controller="Account" asp-action="Register">REGISTER</a> TO POST!</strong></span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <div class="row forumContent">
+
+        @if (Model.Posts.Any())
+        {
+            <table class="table-hover table table-bordered" id="simpleTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <span>
+                                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-controller="Profile" asp-action="Info" asp-route-id="@post.AuthorId"> @post.Author</a>
+                                (@post.AuthorRating) on @post.PostedOn
+                            </td>
+                            <td>
+                                Replies: @post.RepliesNumber
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+        }
+        else
+        {
+            <div class="zeroposts">
+
+                <h2>
+                    Still no @Model.Forum.Title posts!
+                    Be the first to
+                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">post</a>
+
+                </h2>
+            </div>
+        }
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
