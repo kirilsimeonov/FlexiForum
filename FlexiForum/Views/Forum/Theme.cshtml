@@ -18,9 +18,9 @@
 
             <form asp-controller="Forum" asp-action="Search" method="post">
 
-                <div class="searchField">
+                <div>
 
-                    <input asp-for="SearchText" type="text" class="searchInput" placeholder="Search Forum">
+                    <input asp-for="SearchText" type="text" class="searchField" placeholder="Search Forum">
 
                     <button type="submit" class="btn btn-danger">Search</button>
 
@@ -30,7 +30,7 @@
 
             </form>
         </div>
-        <div class="sectionDescription">
+        <div class="section1">
             <div class="forumPic" style="background-image: url(@Model.Forum.Picture); background-size:100%"></div>
             
 
