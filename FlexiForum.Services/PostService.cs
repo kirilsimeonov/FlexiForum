@@ -85,5 +85,12 @@ namespace FlexiForum.Services
 
             
         }
+
+        public IEnumerable<Post> TakeSpecificPosts(string searchText)
+        {
+            var posts = TakeAll().Where(x => x.Content.Contains(searchText) || x.Title.Contains(searchText));
+
+            return posts;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace FlexiForum.Models.HomeViewModels
 
         public IEnumerable<ListPostsModel> LastPosts { get; set; }
 
-        public string SearchQuery { get; set; }
+        public string SearchText { get; set; }
 
        
 
